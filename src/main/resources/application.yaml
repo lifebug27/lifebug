@@ -2,7 +2,7 @@ spring:
   datasource:
     data: data.sql
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgres://dpcwdmmygwvxqe:d113638b455977377844724fea4f9e7aac7ff8dbc4685516ecbdd25d5b52a39b@ec2-54-246-86-167.eu-west-1.compute.amazonaws.com:5432/darsad67es2t64
+    url: jdbc:postgresql://ec2-54-246-86-167.eu-west-1.compute.amazonaws.com:5432/darsad67es2t64
     username: dpcwdmmygwvxqe
     password: d113638b455977377844724fea4f9e7aac7ff8dbc4685516ecbdd25d5b52a39b
 
