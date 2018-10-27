@@ -1,8 +1,6 @@
 package com.lifebug.facevision.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Table(name = "attendance")
@@ -18,7 +16,8 @@ public class Attendance {
     public Attendance() {
     }
 
-    @Column(name = "id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name = "par_id")
