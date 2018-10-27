@@ -7,6 +7,16 @@ import java.util.Objects;
 @Table(name = "attendance")
 public class Attendance {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    @Column(name = "par_id")
+    private Integer parId;
+    @Column(name = "event_id")
+    private Integer eventId;
+    @Column(name = "status")
+    private String status;
+
     public Attendance(Integer parId, Integer eventId, String status) {
         this.parId = parId;
         this.eventId = eventId;
@@ -15,19 +25,6 @@ public class Attendance {
 
     public Attendance() {
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-
-    @Column(name = "par_id")
-    private Integer parId;
-
-    @Column(name = "event_id")
-    private Integer eventId;
-
-    @Column(name = "status")
-    private String status;
 
     public Integer getId() {
         return id;

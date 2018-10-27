@@ -8,6 +8,18 @@ import java.util.Objects;
 @Table
 public class Event {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    @Column(name = "event_time")
+    private String eventTime;
+    @Column(name = "date")
+    private String eventDate;
+    @Column(name = "event_name")
+    private String eventName;
+    private Organiser organiser;
+    private List<Participant> participants;
+
     public Event(String eventTime, String eventDate, String eventName) {
         this.eventTime = eventTime;
         this.eventDate = eventDate;
@@ -17,40 +29,23 @@ public class Event {
     public Event() {
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-
-    @Column(name = "event_time")
-    private String eventTime;
-
-    @Column(name = "date")
-    private String eventDate;
-
-    @Column(name = "event_name")
-    private String eventName;
-
-    private Organiser organiser;
-
-    private List<Participant> participants;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "org_id")
-    public Organiser getOrganiser() {
-        return organiser;
-    }
-
-    public void setOrganiser(Organiser organiser) {
-        this.organiser = organiser;
-    }
-
-    @ManyToMany
-    @JoinTable(name = "attendance",
-            joinColumns = @JoinColumn(name = "par_id"),
-            inverseJoinColumns = @JoinColumn(name = "event_id"))
-    public List<Participant> getParticipants() {
-        return participants;
-    }
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "org_id")
+//    public Organiser getOrganiser() {
+//        return organiser;
+//    }
+//
+//    public void setOrganiser(Organiser organiser) {
+//        this.organiser = organiser;
+//    }
+//
+//    @ManyToMany
+//    @JoinTable(name = "attendance",
+//            joinColumns = @JoinColumn(name = "par_id"),
+//            inverseJoinColumns = @JoinColumn(name = "event_id"))
+//    public List<Participant> getParticipants() {
+//        return participants;
+//    }
 
     public void setParticipants(List<Participant> participants) {
         this.participants = participants;

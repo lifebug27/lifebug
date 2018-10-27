@@ -8,6 +8,21 @@ import java.util.Objects;
 @Table(name = "participant")
 public class Participant {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "second_name")
+    private String secondName;
+    @Column(name = "patronymic")
+    private String patronymic;
+    @Column(name = "telephone_number")
+    private String telNumber;
+    @Column(name = "photo")
+    private String photo;
+    private List<Event> events;
+
     public Participant(String firstName, String secondName, String patronymic) {
         this.firstName = firstName;
         this.secondName = secondName;
@@ -17,34 +32,13 @@ public class Participant {
     public Participant() {
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-
-    @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name = "second_name")
-    private String secondName;
-
-    @Column(name = "patronymic")
-    private String patronymic;
-
-    @Column(name = "telephone_number")
-    private String telNumber;
-
-    @Column(name = "photo")
-    private String photo;
-
-    private List<Event> events;
-
-    @ManyToMany
-    @JoinTable(name = "attendance",
-            joinColumns = @JoinColumn(name = "event_id_id"),
-            inverseJoinColumns = @JoinColumn(name = "par_id"))
-    public List<Event> getEvents() {
-        return events;
-    }
+//    @ManyToMany
+//    @JoinTable(name = "attendance",
+//            joinColumns = @JoinColumn(name = "event_id_id"),
+//            inverseJoinColumns = @JoinColumn(name = "par_id"))
+//    public List<Event> getEvents() {
+//        return events;
+//    }
 
     public void setEvents(List<Event> events) {
         this.events = events;

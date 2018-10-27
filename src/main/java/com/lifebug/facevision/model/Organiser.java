@@ -1,14 +1,23 @@
 package com.lifebug.facevision.model;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
-
-import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Table(name = "organiser")
 public class Organiser {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "second_name")
+    private String secondName;
+    @Column(name = "patronymic")
+    private String patronymic;
+    @Column(name = "telephone_number")
+    private String telNumber;
 
     public Organiser(String firstName, String secondName, String patronymic) {
         this.firstName = firstName;
@@ -19,41 +28,25 @@ public class Organiser {
     public Organiser() {
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+//    private List<Event> events;
+//
+//    @Lob
+//    @Basic(fetch = LAZY)
+//    @Column(name = "photo")
+//    private String photo;
+//
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "organiser", cascade = CascadeType.ALL)
+//    public List<Event> getEvents() {
+//        return events;
+//    }
 
-    @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name = "second_name")
-    private String secondName;
-
-    @Column(name = "patronymic")
-    private String patronymic;
-
-    @Column(name = "telephone_number")
-    private String telNumber;
-
-    private List<Event> events;
-
-    @Lob
-    @Basic(fetch = LAZY)
-    @Column(name = "photo")
-    private String photo;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "organiser", cascade = CascadeType.ALL)
-    public List<Event> getEvents() {
-        return events;
-    }
-
-    public void addEvent(Event event){
-        events.add(event);
-    }
-
-    public void setEvents(List<Event> events) {
-        this.events = events;
-    }
+//    public void addEvent(Event event){
+//        events.add(event);
+//    }
+//
+//    public void setEvents(List<Event> events) {
+//        this.events = events;
+//    }
 
     public Integer getId() {
         return id;
@@ -95,13 +88,13 @@ public class Organiser {
         this.telNumber = telNumber;
     }
 
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
+//    public String getPhoto() {
+//        return photo;
+//    }
+//
+//    public void setPhoto(String photo) {
+//        this.photo = photo;
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -112,12 +105,11 @@ public class Organiser {
                 Objects.equals(firstName, organiser.firstName) &&
                 Objects.equals(secondName, organiser.secondName) &&
                 Objects.equals(patronymic, organiser.patronymic) &&
-                Objects.equals(telNumber, organiser.telNumber) &&
-                Objects.equals(photo, organiser.photo);
+                Objects.equals(telNumber, organiser.telNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, secondName, patronymic, telNumber, photo);
+        return Objects.hash(id, firstName, secondName, patronymic, telNumber);
     }
 }
