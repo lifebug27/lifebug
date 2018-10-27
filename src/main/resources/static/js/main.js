@@ -4,7 +4,8 @@ Vue.component('person-form', {
     props: ['people'],
     data: function () {
         return {
-            text: ''
+            text: '',
+            status: ''
         }
     },
     template:
@@ -14,12 +15,13 @@ Vue.component('person-form', {
     '</div>',
     methods: {
         save: function () {
-            let person = {text: this.name};
+            let person = {text: this.name, status: this.status};
 
             peopleApi.save({}, person).then(result =>
                 result.json().then(data => {
                     this.people.push(data);
                     this.name = '';
+                    this.status = '';
                 })
             )
         }
@@ -29,10 +31,13 @@ Vue.component('person-form', {
 Vue.component('person-row', {
     props: ['person'],
     template: '<div>' +
-    '<i>({{ person.id }})</i> {{person.name}} ' +
-    '<span>' +
-    '<input type="button" value="Edit" v-on:click="edit" />' +
-    '</span>' +
+    '<i>({{ person.id }})</i> ' +
+        '{{person.name}} ' +
+        '-------->' +
+        '{{person.status}} ' +
+    // '<span>' +
+    // '<input type="button" value="Edit" v-on:click="edit" />' +
+    // '</span>' +
     '</div>',
     methods: {
         edit: function () {
