@@ -1,12 +1,8 @@
 package com.lifebug.facevision.model;
 
 import javax.persistence.*;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-
-import static java.util.Objects.*;
-import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Table(name = "participant")
@@ -43,9 +39,9 @@ public class Participant {
     private List<Event> events;
 
     @ManyToMany
-    @JoinTable(name="attendance",
-            joinColumns=@JoinColumn(name="event_id_id"),
-            inverseJoinColumns=@JoinColumn(name="par_id"))
+    @JoinTable(name = "attendance",
+            joinColumns = @JoinColumn(name = "event_id_id"),
+            inverseJoinColumns = @JoinColumn(name = "par_id"))
     public List<Event> getEvents() {
         return events;
     }
@@ -117,7 +113,6 @@ public class Participant {
 
     @Override
     public int hashCode() {
-        int result = hash(id, firstName, secondName, patronymic, telNumber, photo);
-        return result;
+        return Objects.hash(id, firstName, secondName, patronymic, telNumber, photo);
     }
 }
