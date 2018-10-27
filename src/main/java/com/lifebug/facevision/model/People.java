@@ -9,13 +9,12 @@ import java.util.Objects;
 @Entity
 @Table(name = "people")
 public class People {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     @Column(name = "name")
     private String name;
-
     @Column(name = "status")
     private String status;
 
