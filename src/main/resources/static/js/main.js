@@ -1,7 +1,7 @@
-var messageApi = Vue.resource('/api/people{/id}');
+var peopleApi = Vue.resource('/api/people{/id}');
 
-Vue.component('message-form', {
-    props: ['messages'],
+Vue.component('person-form', {
+    props: ['people'],
     data: function () {
         return {
             text: ''
@@ -14,22 +14,22 @@ Vue.component('message-form', {
     '</div>',
     methods: {
         save: function () {
-            var message = {text: this.text};
+            let person = {text: this.name};
 
-            messageApi.save({}, message).then(result =>
+            peopleApi.save({}, person).then(result =>
                 result.json().then(data => {
-                    this.messages.push(data);
-                    this.text = '';
+                    this.people.push(data);
+                    this.name = '';
                 })
             )
         }
     }
 });
 
-Vue.component('message-row', {
-    props: ['message'],
+Vue.component('person-row', {
+    props: ['person'],
     template: '<div>' +
-    '<i>({{ message.id }})</i> {{message.text}} ' +
+    '<i>({{ person.id }})</i> {{person.name}} ' +
     '<span>' +
     '<input type="button" value="Edit" v-on:click="edit" />' +
     '</span>' +
@@ -41,8 +41,8 @@ Vue.component('message-row', {
     }
 });
 
-Vue.component('messages-list', {
-    props: ['messages'],
+Vue.component('people-list', {
+    props: ['people'],
     data: function () {
         return{
 
@@ -50,31 +50,31 @@ Vue.component('messages-list', {
     },
     template:
     '<div>' +
-    '<message-form :messages="messages" />' +
-    '<message-row v-for = "message in messages" :key="message.id" :message="message">' +
-    '{{message.text}}' +
-    '</message-row>' +
+    '<person-form :people="people" />' +
+    '<person-row v-for = "person in people" :key="person.id" :person="person">' +
+    '{{person.name}}' +
+    '</person-row>' +
     '</div>',
     created: function () {
-        messageApi.get().then(result =>
+        peopleApi.get().then(result =>
             result.json().then(data =>
-                data.forEach(message =>
-                    this.messages.push(message)
+                data.forEach(person =>
+                    this.people.push(person)
                 )
             )
         )
     },
     methods: {
         editMessage: function () {
-            this.message = message;
+            this.person = person;
         }
     }
 });
 
 var app = new Vue({
     el: '#app',
-    template: '<messages-list :messages="messages" />',
+    template: '<people-list :people="people" />',
     data: {
-        messages: []
+        people: []
     }
 });
