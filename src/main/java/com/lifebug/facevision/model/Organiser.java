@@ -2,6 +2,7 @@ package com.lifebug.facevision.model;
 
 import javax.persistence.*;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import static javax.persistence.FetchType.LAZY;
@@ -9,6 +10,15 @@ import static javax.persistence.FetchType.LAZY;
 @Entity
 @Table(name = "organiser")
 public class Organiser {
+
+    public Organiser(String firstName, String secondName, String patronymic) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.patronymic = patronymic;
+    }
+
+    public Organiser() {
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,18 +36,20 @@ public class Organiser {
     @Column(name = "telephone_number")
     private String telNumber;
 
+    private List<Event> events;
+
     @Lob
-    @Basic(fetch=LAZY)
-    @Column(name="photo")
+    @Basic(fetch = LAZY)
+    @Column(name = "photo")
     private byte[] photo;
 
-    public Organiser(String firstName, String secondName, String patronymic) {
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.patronymic = patronymic;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "organiser", cascade = CascadeType.ALL)
+    public List<Event> getEvents() {
+        return events;
     }
 
-    public Organiser() {
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 
     public Integer getId() {

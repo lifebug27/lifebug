@@ -1,6 +1,7 @@
 package com.lifebug.facevision.model;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -28,6 +29,32 @@ public class Event {
 
     @Column(name = "event_name")
     private String eventName;
+
+    private Organiser organiser;
+
+    private List<Participant> participants;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "org_id")
+    public Organiser getOrganiser() {
+        return organiser;
+    }
+
+    public void setOrganiser(Organiser organiser) {
+        this.organiser = organiser;
+    }
+
+    @ManyToMany
+    @JoinTable(name = "attendance",
+            joinColumns = @JoinColumn(name = "par_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id"))
+    public List<Participant> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<Participant> participants) {
+        this.participants = participants;
+    }
 
     public Integer getId() {
         return id;

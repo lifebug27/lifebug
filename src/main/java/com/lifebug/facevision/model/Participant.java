@@ -1,15 +1,26 @@
 package com.lifebug.facevision.model;
 
 import javax.persistence.*;
-
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
+import static java.util.Objects.*;
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Table(name = "participant")
 public class Participant {
+
+    public Participant(String firstName, String secondName, String patronymic) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.patronymic = patronymic;
+    }
+
+    public Participant() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -26,18 +37,21 @@ public class Participant {
     @Column(name = "telephone_number")
     private String telNumber;
 
-    @Lob
-    @Basic(fetch=LAZY)
-    @Column(name="photo")
-    private byte[] photo;
+    @Column(name = "photo")
+    private String photo;
 
-    public Participant(String firstName, String secondName, String patronymic) {
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.patronymic = patronymic;
+    private List<Event> events;
+
+    @ManyToMany
+    @JoinTable(name="attendance",
+            joinColumns=@JoinColumn(name="event_id_id"),
+            inverseJoinColumns=@JoinColumn(name="par_id"))
+    public List<Event> getEvents() {
+        return events;
     }
 
-    public Participant() {
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 
     public Integer getId() {
@@ -80,11 +94,11 @@ public class Participant {
         this.telNumber = telNumber;
     }
 
-    public byte[] getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte[] photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
@@ -98,13 +112,12 @@ public class Participant {
                 Objects.equals(secondName, that.secondName) &&
                 Objects.equals(patronymic, that.patronymic) &&
                 Objects.equals(telNumber, that.telNumber) &&
-                Arrays.equals(photo, that.photo);
+                Objects.equals(photo, that.photo);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, firstName, secondName, patronymic, telNumber);
-        result = 31 * result + Arrays.hashCode(photo);
+        int result = hash(id, firstName, secondName, patronymic, telNumber, photo);
         return result;
     }
 }
