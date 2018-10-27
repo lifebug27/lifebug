@@ -54,3 +54,15 @@ VALUES (2, 3, 'false');
 
 INSERT INTO darsad67es2t64.public.attendance(event_id, par_id, status)
 VALUES (2, 4, 'true');
+
+INSERT INTO people(name, status)
+VALUES (Nekrasov, 'no');
+
+INSERT INTO people(name, status)
+VALUES (Cha, 'no');
+
+INSERT INTO people(name, status)
+VALUES (Van, 'no');
+
+INSERT INTO people(name, status)
+VALUES (Kolya, 'no');
