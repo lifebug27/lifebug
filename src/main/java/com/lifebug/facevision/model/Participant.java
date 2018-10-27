@@ -1,5 +1,7 @@
 package com.lifebug.facevision.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -33,15 +35,16 @@ public class Participant {
     @Column(name = "telephone_number")
     private String telNumber;
 
+    @Type(type = "text")
     @Column(name = "photo")
     private String photo;
 
-    private List<Event> events;
-
     @ManyToMany
     @JoinTable(name = "attendance",
-            joinColumns = @JoinColumn(name = "event_id_id"),
-            inverseJoinColumns = @JoinColumn(name = "par_id"))
+            joinColumns = @JoinColumn(name = "par_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id"))
+    private List<Event> events;
+
     public List<Event> getEvents() {
         return events;
     }

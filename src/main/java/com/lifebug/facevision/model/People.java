@@ -1,5 +1,7 @@
 package com.lifebug.facevision.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -17,9 +19,20 @@ public class People {
     @Column(name = "status")
     private String status;
 
+    @Type(type = "text")
+    @Column(name = "photo")
+    private String photo;
+
     public People() {
     }
 
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
 
     public Integer getId() {
         return id;
@@ -48,16 +61,16 @@ public class People {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof People)) return false;
         People people = (People) o;
         return Objects.equals(id, people.id) &&
                 Objects.equals(name, people.name) &&
-                Objects.equals(status, people.status);
+                Objects.equals(status, people.status) &&
+                Objects.equals(photo, people.photo);
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(id, name, status);
+        return Objects.hash(id, name, status, photo);
     }
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table
+@Table(name = "event")
 public class Event {
 
     public Event(String eventTime, String eventDate, String eventName) {
@@ -30,24 +30,24 @@ public class Event {
     @Column(name = "event_name")
     private String eventName;
 
+    @ManyToOne()
+    @JoinColumn(name = "org_id", referencedColumnName = "id")
     private Organiser organiser;
 
+    @ManyToMany
+    @JoinTable(name = "attendance",
+            joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "par_id"))
     private List<Participant> participants;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "org_id")
     public Organiser getOrganiser() {
-        return organiser;
+        return this.organiser;
     }
 
     public void setOrganiser(Organiser organiser) {
         this.organiser = organiser;
     }
 
-    @ManyToMany
-    @JoinTable(name = "attendance",
-            joinColumns = @JoinColumn(name = "par_id"),
-            inverseJoinColumns = @JoinColumn(name = "event_id"))
     public List<Participant> getParticipants() {
         return participants;
     }

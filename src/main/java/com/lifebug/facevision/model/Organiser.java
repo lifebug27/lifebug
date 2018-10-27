@@ -1,10 +1,10 @@
 package com.lifebug.facevision.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
-
-import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Table(name = "organiser")
@@ -35,16 +35,15 @@ public class Organiser {
     @Column(name = "telephone_number")
     private String telNumber;
 
+    @OneToMany(mappedBy = "organiser", targetEntity = Event.class)
     private List<Event> events;
 
-    @Lob
-    @Basic(fetch = LAZY)
+    @Type(type = "text")
     @Column(name = "photo")
     private String photo;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "organiser", cascade = CascadeType.ALL)
     public List<Event> getEvents() {
-        return events;
+        return this.events;
     }
 
     public void addEvent(Event event){
