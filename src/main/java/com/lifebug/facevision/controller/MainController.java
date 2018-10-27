@@ -9,6 +9,6 @@ public class MainController {
 
     @GetMapping("/refresh")
     public String refresh(RedirectAttributes redirectAttributes) {
-        return "redirect:/api/people";
+        return "redirect:/";
     }
 }
