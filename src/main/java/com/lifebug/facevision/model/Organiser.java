@@ -4,9 +4,12 @@ import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Objects;
 
+import static javax.persistence.FetchType.LAZY;
+
 @Entity
 @Table(name = "organiser")
 public class Organiser {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -23,7 +26,9 @@ public class Organiser {
     @Column(name = "telephone_number")
     private String telNumber;
 
-    @Column(name = "photo")
+    @Lob
+    @Basic(fetch=LAZY)
+    @Column(name="photo")
     private byte[] photo;
 
     public Organiser(String firstName, String secondName, String patronymic) {

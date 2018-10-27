@@ -2,8 +2,13 @@ package com.lifebug.facevision.model;
 
 import javax.persistence.*;
 
+import java.util.Arrays;
+import java.util.Objects;
+
+import static javax.persistence.FetchType.LAZY;
+
 @Entity
-@Table(name = "organiser")
+@Table(name = "participant")
 public class Participant {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,7 +26,9 @@ public class Participant {
     @Column(name = "telephone_number")
     private String telNumber;
 
-    @Column(name = "photo")
+    @Lob
+    @Basic(fetch=LAZY)
+    @Column(name="photo")
     private byte[] photo;
 
     public Participant(String firstName, String secondName, String patronymic) {
@@ -79,5 +86,25 @@ public class Participant {
 
     public void setPhoto(byte[] photo) {
         this.photo = photo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Participant)) return false;
+        Participant that = (Participant) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(firstName, that.firstName) &&
+                Objects.equals(secondName, that.secondName) &&
+                Objects.equals(patronymic, that.patronymic) &&
+                Objects.equals(telNumber, that.telNumber) &&
+                Arrays.equals(photo, that.photo);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(id, firstName, secondName, patronymic, telNumber);
+        result = 31 * result + Arrays.hashCode(photo);
+        return result;
     }
 }
