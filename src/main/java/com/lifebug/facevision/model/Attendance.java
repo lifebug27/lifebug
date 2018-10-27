@@ -30,6 +30,14 @@ public class Attendance {
     @Column(name = "status")
     private String status;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Integer getParId() {
         return parId;
     }
