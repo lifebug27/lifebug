@@ -1,7 +1,6 @@
 package com.lifebug.facevision.model;
 
 import javax.persistence.*;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -41,11 +40,15 @@ public class Organiser {
     @Lob
     @Basic(fetch = LAZY)
     @Column(name = "photo")
-    private byte[] photo;
+    private String photo;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "organiser", cascade = CascadeType.ALL)
     public List<Event> getEvents() {
         return events;
+    }
+
+    public void addEvent(Event event){
+        events.add(event);
     }
 
     public void setEvents(List<Event> events) {
@@ -92,11 +95,11 @@ public class Organiser {
         this.telNumber = telNumber;
     }
 
-    public byte[] getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte[] photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
@@ -110,13 +113,11 @@ public class Organiser {
                 Objects.equals(secondName, organiser.secondName) &&
                 Objects.equals(patronymic, organiser.patronymic) &&
                 Objects.equals(telNumber, organiser.telNumber) &&
-                Arrays.equals(photo, organiser.photo);
+                Objects.equals(photo, organiser.photo);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, firstName, secondName, patronymic, telNumber);
-        result = 31 * result + Arrays.hashCode(photo);
-        return result;
+        return Objects.hash(id, firstName, secondName, patronymic, telNumber, photo);
     }
 }
