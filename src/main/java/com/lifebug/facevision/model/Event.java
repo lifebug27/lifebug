@@ -17,8 +17,8 @@ public class Event {
     private String eventDate;
     @Column(name = "event_name")
     private String eventName;
-    private Organiser organiser;
-    private List<Participant> participants;
+//    private Organiser organiser;
+//    private List<Participant> participants;
 
     public Event(String eventTime, String eventDate, String eventName) {
         this.eventTime = eventTime;
@@ -46,10 +46,10 @@ public class Event {
 //    public List<Participant> getParticipants() {
 //        return participants;
 //    }
-
-    public void setParticipants(List<Participant> participants) {
-        this.participants = participants;
-    }
+//
+//    public void setParticipants(List<Participant> participants) {
+//        this.participants = participants;
+//    }
 
     public Integer getId() {
         return id;

@@ -21,7 +21,7 @@ public class Participant {
     private String telNumber;
     @Column(name = "photo")
     private String photo;
-    private List<Event> events;
+//    private List<Event> events;
 
     public Participant(String firstName, String secondName, String patronymic) {
         this.firstName = firstName;
@@ -40,9 +40,9 @@ public class Participant {
 //        return events;
 //    }
 
-    public void setEvents(List<Event> events) {
-        this.events = events;
-    }
+//    public void setEvents(List<Event> events) {
+//        this.events = events;
+//    }
 
     public Integer getId() {
         return id;

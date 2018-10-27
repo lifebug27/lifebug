@@ -3,6 +3,8 @@ package com.lifebug.facevision.model;
 import javax.persistence.*;
 import java.util.Objects;
 
+import static javax.persistence.FetchType.LAZY;
+
 @Entity
 @Table(name = "organiser")
 public class Organiser {
@@ -30,10 +32,10 @@ public class Organiser {
 
 //    private List<Event> events;
 //
-//    @Lob
-//    @Basic(fetch = LAZY)
-//    @Column(name = "photo")
-//    private String photo;
+    @Lob
+    @Basic(fetch = LAZY)
+    @Column(name = "photo")
+    private String photo;
 //
 //    @OneToMany(fetch = FetchType.LAZY, mappedBy = "organiser", cascade = CascadeType.ALL)
 //    public List<Event> getEvents() {
@@ -88,13 +90,13 @@ public class Organiser {
         this.telNumber = telNumber;
     }
 
-//    public String getPhoto() {
-//        return photo;
-//    }
-//
-//    public void setPhoto(String photo) {
-//        this.photo = photo;
-//    }
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
 
     @Override
     public boolean equals(Object o) {
