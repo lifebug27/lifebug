@@ -3,7 +3,6 @@ package com.lifebug.facevision.model;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
 @Table
 public class Attendance {
 
