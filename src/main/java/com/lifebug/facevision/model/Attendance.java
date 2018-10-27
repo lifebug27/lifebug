@@ -1,9 +1,12 @@
 package com.lifebug.facevision.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Objects;
 
-@Table
+@Table(name = "attendance")
+@Entity
 public class Attendance {
 
     public Attendance(Integer parId, Integer eventId, String status) {
@@ -14,6 +17,9 @@ public class Attendance {
 
     public Attendance() {
     }
+
+    @Column(name = "id")
+    private Integer id;
 
     @Column(name = "par_id")
     private Integer parId;
