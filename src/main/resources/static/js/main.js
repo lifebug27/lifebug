@@ -33,9 +33,9 @@ Vue.component('person-row', {
     props: ['person'],
     template:
         '<div>' +
-        '<td>({{ person.id }})</td> ' +
+        '<tr><td>({{ person.id }})</td> ' +
         '<td>{{person.name}}</td> ' +
-        '<td>{{person.status}}</td> ' +
+        '<td>{{person.status}}</td></tr> ' +
         // '<span>' +
         // '<input type="button" value="Edit" v-on:click="edit" />' +
         // '</span>' +
@@ -64,9 +64,9 @@ Vue.component('people-list', {
         '</tr>' +
         '</thead>' +
         '<tbody>' +
-        '<tr><person-row v-for = "person in people" :key="person.id" :person="person">' +
+        '<person-row v-for = "person in people" :key="person.id" :person="person">' +
         '{{person.name}}' +
-        '</person-row></tr>' +
+        '</person-row>' +
         '</tbody>' +
         '</table>' +
         '</div>',
