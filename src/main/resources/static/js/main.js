@@ -63,7 +63,7 @@ Vue.component('people-list', {
         peopleApi.get()
             .then(result => result.json()
                 .then(data =>
-                    data.forEach(function (person) {
+                    data.forEach(person => {
                             this.people.push(person);
                             if (person.status === 'yes') {
                                 document.getElementById('app').class = '--make-green';
