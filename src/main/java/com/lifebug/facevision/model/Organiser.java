@@ -1,25 +1,14 @@
 package com.lifebug.facevision.model;
 
-import javax.persistence.*;
-import java.util.Objects;
+import org.hibernate.annotations.Type;
 
-import static javax.persistence.FetchType.LAZY;
+import javax.persistence.*;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "organiser")
 public class Organiser {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    @Column(name = "first_name")
-    private String firstName;
-    @Column(name = "second_name")
-    private String secondName;
-    @Column(name = "patronymic")
-    private String patronymic;
-    @Column(name = "telephone_number")
-    private String telNumber;
 
     public Organiser(String firstName, String secondName, String patronymic) {
         this.firstName = firstName;
@@ -30,25 +19,40 @@ public class Organiser {
     public Organiser() {
     }
 
-//    private List<Event> events;
-//
-    @Lob
-    @Basic(fetch = LAZY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "second_name")
+    private String secondName;
+
+    @Column(name = "patronymic")
+    private String patronymic;
+
+    @Column(name = "telephone_number")
+    private String telNumber;
+
+    @OneToMany(mappedBy = "organiser", targetEntity = Event.class)
+    private List<Event> events;
+
+    @Type(type = "text")
     @Column(name = "photo")
     private String photo;
-//
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "organiser", cascade = CascadeType.ALL)
-//    public List<Event> getEvents() {
-//        return events;
-//    }
 
-//    public void addEvent(Event event){
-//        events.add(event);
-//    }
-//
-//    public void setEvents(List<Event> events) {
-//        this.events = events;
-//    }
+    public List<Event> getEvents() {
+        return this.events;
+    }
+
+    public void addEvent(Event event){
+        events.add(event);
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
 
     public Integer getId() {
         return id;
@@ -107,11 +111,12 @@ public class Organiser {
                 Objects.equals(firstName, organiser.firstName) &&
                 Objects.equals(secondName, organiser.secondName) &&
                 Objects.equals(patronymic, organiser.patronymic) &&
-                Objects.equals(telNumber, organiser.telNumber);
+                Objects.equals(telNumber, organiser.telNumber) &&
+                Objects.equals(photo, organiser.photo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, secondName, patronymic, telNumber);
+        return Objects.hash(id, firstName, secondName, patronymic, telNumber, photo);
     }
 }

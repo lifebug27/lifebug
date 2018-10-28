@@ -5,20 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table
+@Table(name = "event")
 public class Event {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    @Column(name = "event_time")
-    private String eventTime;
-    @Column(name = "date")
-    private String eventDate;
-    @Column(name = "event_name")
-    private String eventName;
-//    private Organiser organiser;
-//    private List<Participant> participants;
 
     public Event(String eventTime, String eventDate, String eventName) {
         this.eventTime = eventTime;
@@ -29,27 +17,44 @@ public class Event {
     public Event() {
     }
 
-//    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "org_id")
-//    public Organiser getOrganiser() {
-//        return organiser;
-//    }
-//
-//    public void setOrganiser(Organiser organiser) {
-//        this.organiser = organiser;
-//    }
-//
-//    @ManyToMany
-//    @JoinTable(name = "attendance",
-//            joinColumns = @JoinColumn(name = "par_id"),
-//            inverseJoinColumns = @JoinColumn(name = "event_id"))
-//    public List<Participant> getParticipants() {
-//        return participants;
-//    }
-//
-//    public void setParticipants(List<Participant> participants) {
-//        this.participants = participants;
-//    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+
+    @Column(name = "event_time")
+    private String eventTime;
+
+    @Column(name = "date")
+    private String eventDate;
+
+    @Column(name = "event_name")
+    private String eventName;
+
+    @ManyToOne()
+    @JoinColumn(name = "org_id", referencedColumnName = "id")
+    private Organiser organiser;
+
+    @ManyToMany
+    @JoinTable(name = "attendance",
+            joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "par_id"))
+    private List<Participant> participants;
+
+    public Organiser getOrganiser() {
+        return this.organiser;
+    }
+
+    public void setOrganiser(Organiser organiser) {
+        this.organiser = organiser;
+    }
+
+    public List<Participant> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<Participant> participants) {
+        this.participants = participants;
+    }
 
     public Integer getId() {
         return id;

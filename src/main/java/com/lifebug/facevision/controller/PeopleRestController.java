@@ -16,31 +16,31 @@ public class PeopleRestController {
     @Autowired
     private PeopleService service;
 
-    @ApiOperation("Returns all people")
+    //@ApiOperation("Returns all people")
     @GetMapping
     public List<People> getAllProfile() {
         return service.getAllProfile();
     }
 
-    @ApiOperation("Returns people by id")
+    //@ApiOperation("Returns people by id")
     @GetMapping("/{id}")
     public People getProfile(@ApiParam(value = "User's uuid", required = true) @PathVariable Integer id) {
         return service.getProfile(id);
     }
 
-    @ApiOperation("Deletes people by id")
+    //@ApiOperation("Deletes people by id")
     @DeleteMapping("/{id}")
     public void deleteProfile(@ApiParam(value = "User's uuid", required = true) @PathVariable Integer id) {
         service.deleteProfile(id);
     }
 
-    @ApiOperation("Adds new people")
+   // @ApiOperation("Adds new people")
     @PostMapping
     public ResponseEntity<Object> createProfile(@ApiParam(value = "User's profile", required = true) @RequestBody People people) {
         return service.createProfile(people);
     }
 
-    @ApiOperation("Updates people profile by id")
+    //@ApiOperation("Updates people profile by id")
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateProfile(@ApiParam(value = "User's profile", required = true) @RequestBody People people,
                                                 @ApiParam(value = "User's uuid", required = true) @PathVariable Integer id) {

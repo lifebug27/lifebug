@@ -1,5 +1,7 @@
 package com.lifebug.facevision.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -7,21 +9,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "participant")
 public class Participant {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    @Column(name = "first_name")
-    private String firstName;
-    @Column(name = "second_name")
-    private String secondName;
-    @Column(name = "patronymic")
-    private String patronymic;
-    @Column(name = "telephone_number")
-    private String telNumber;
-    @Column(name = "photo")
-    private String photo;
-//    private List<Event> events;
 
     public Participant(String firstName, String secondName, String patronymic) {
         this.firstName = firstName;
@@ -32,17 +19,39 @@ public class Participant {
     public Participant() {
     }
 
-//    @ManyToMany
-//    @JoinTable(name = "attendance",
-//            joinColumns = @JoinColumn(name = "event_id_id"),
-//            inverseJoinColumns = @JoinColumn(name = "par_id"))
-//    public List<Event> getEvents() {
-//        return events;
-//    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
-//    public void setEvents(List<Event> events) {
-//        this.events = events;
-//    }
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "second_name")
+    private String secondName;
+
+    @Column(name = "patronymic")
+    private String patronymic;
+
+    @Column(name = "telephone_number")
+    private String telNumber;
+
+    @Type(type = "text")
+    @Column(name = "photo")
+    private String photo;
+
+    @ManyToMany
+    @JoinTable(name = "attendance",
+            joinColumns = @JoinColumn(name = "par_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id"))
+    private List<Event> events;
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
 
     public Integer getId() {
         return id;
