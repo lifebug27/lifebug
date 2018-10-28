@@ -32,7 +32,7 @@ Vue.component('person-form', {
 Vue.component('person-row', {
     props: ['person'],
     template:
-        '<div class="container">' +
+        '<div>' +
         '<td>({{ person.id }})</td> ' +
         '<td>{{person.name}}</td> ' +
         '<td>{{person.status}}</td> ' +
@@ -54,6 +54,7 @@ Vue.component('people-list', {
     },
     template:
         '<div>' +
+        '<person-form :people="people" />' +
         '<table class="table">' +
         '<thead>' +
         '<tr>' +
