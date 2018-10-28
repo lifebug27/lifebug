@@ -53,15 +53,24 @@ Vue.component('people-list', {
         return {}
     },
     template:
+        '<table class="table">' +
+        '<thead>' +
+        '<tr>' +
+        '<th>id</th>' +
+        '<th>Name</th>' +
+        '<th>Status</th> ' +
+        '</tr>' +
+        '</thead>' +
+        '<tbody>' +
+        '<tr>' +
         '<div>' +
         '<person-form :people="people" />' +
         '<person-row v-for = "person in people" :key="person.id" :person="person">' +
-        '{{person.name}}' +
-        '<script> if (person.status === "yes") {document.getElementById("app").classList.add("--make-green");}' +
-        'else{' +
-        'document.getElementById("app").classList.remove("--make-green");}' +
-        '</script>' +
+        '<td>{{person.name}}</td>' +
         '</person-row>' +
+        '</tr>' +
+        '</tbody>' +
+        '</table>' +
         '</div>',
     created: function () {
         peopleApi.get()
