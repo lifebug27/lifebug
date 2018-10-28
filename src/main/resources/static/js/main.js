@@ -54,7 +54,7 @@ Vue.component('people-list', {
     },
     template:
         '<div>' +
-        '<person-form :people="people" />' +
+        '<person-form :people="people" style="display:none;"/>' +
         '<table class="table">' +
         '<thead>' +
         '<tr>' +
@@ -64,9 +64,9 @@ Vue.component('people-list', {
         '</tr>' +
         '</thead>' +
         '<tbody>' +
-        '<person-row v-for = "person in people" :key="person.id" :person="person">' +
-        '<tr>{{person.name}}<tr>' +
-        '</person-row>' +
+        '<tr><person-row v-for = "person in people" :key="person.id" :person="person">' +
+        '{{person.name}}' +
+        '</person-row></tr>' +
         '</tbody>' +
         '</table>' +
         '</div>',
