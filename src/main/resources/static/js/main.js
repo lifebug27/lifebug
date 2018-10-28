@@ -31,11 +31,25 @@ Vue.component('person-form', {
 
 Vue.component('person-row', {
     props: ['person'],
-    template: '<div>' +
-        '<i>({{ person.id }})</i> ' +
-        '{{person.name}} ' +
-        '-------->' +
-        '{{person.status}} ' +
+    template:
+        '<div>' +
+
+        '<table class="table">' +
+        '<thead>' +
+        '<tr>' +
+        '<th>id</th>' +
+        '<th>Name</th>' +
+        '<th>Status</th> ' +
+        '</tr>' +
+        '</thead>' +
+        '<tbody>' +
+        '<tr>' +
+        '<td>({{ person.id }})</td> ' +
+        '<td>{{person.name}}</td> ' +
+        '<td>{{person.status}}</td> ' +
+        '</tr>' +
+        '</tbody>' +
+        '</table>' +
         // '<span>' +
         // '<input type="button" value="Edit" v-on:click="edit" />' +
         // '</span>' +
@@ -53,24 +67,12 @@ Vue.component('people-list', {
         return {}
     },
     template:
-        '<table class="table">' +
-        '<thead>' +
-        '<tr>' +
-        '<th>id</th>' +
-        '<th>Name</th>' +
-        '<th>Status</th> ' +
-        '</tr>' +
-        '</thead>' +
-        '<tbody>' +
-        '<tr>' +
+
         '<div>' +
         '<person-form :people="people" />' +
         '<person-row v-for = "person in people" :key="person.id" :person="person">' +
-        '<td>{{person.name}}</td>' +
+        '{{person.name}}' +
         '</person-row>' +
-        '</tr>' +
-        '</tbody>' +
-        '</table>' +
         '</div>',
     created: function () {
         peopleApi.get()
