@@ -56,20 +56,16 @@ Vue.component('people-list', {
         '<div>' +
         '<person-form :people="people" />' +
         '<table class="table">' +
-        '<thead>' +
         '<tr>' +
         '<th>id</th>' +
         '<th>Name</th>' +
         '<th>Status</th> ' +
         '</tr>' +
-        '</thead>' +
-        '<tbody>' +
         '<tr>' +
         '<person-row v-for = "person in people" :key="person.id" :person="person">' +
         '{{person.name}}' +
         '</person-row>' +
         '</tr>' +
-        '</tbody>' +
         '</table>' +
         '</div>',
     created: function () {
