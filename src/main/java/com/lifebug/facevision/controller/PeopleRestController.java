@@ -17,12 +17,14 @@ public class PeopleRestController {
     private PeopleService service;
 
     //@ApiOperation("Returns all people")
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping
     public List<People> getAllProfile() {
         return service.getAllProfile();
     }
 
     //@ApiOperation("Returns people by id")
+    @CrossOrigin
     @GetMapping("/{id}")
     public People getProfile(@ApiParam(value = "User's uuid", required = true) @PathVariable Integer id) {
         return service.getProfile(id);
