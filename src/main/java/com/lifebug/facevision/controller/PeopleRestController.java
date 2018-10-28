@@ -17,12 +17,14 @@ public class PeopleRestController {
     private PeopleService service;
 
     //@ApiOperation("Returns all people")
-    @GetMapping
+    @CrossOrigin(origins = "https://facevision27.herokuapp.com")
+    @GetMapping("/api/people")
     public List<People> getAllProfile() {
         return service.getAllProfile();
     }
 
     //@ApiOperation("Returns people by id")
+    @CrossOrigin
     @GetMapping("/{id}")
     public People getProfile(@ApiParam(value = "User's uuid", required = true) @PathVariable Integer id) {
         return service.getProfile(id);
