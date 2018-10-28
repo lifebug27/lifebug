@@ -32,7 +32,7 @@ Vue.component('person-form', {
 Vue.component('person-row', {
     props: ['person'],
     template:
-        '<div>' +
+        '<div style="width: 518px">' +
         '<tr><td>({{ person.id }})</td> ' +
         '<td>{{person.name}}</td> ' +
         '<td>{{person.status}}</td></tr> ' +
