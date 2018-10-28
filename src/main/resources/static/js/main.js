@@ -33,8 +33,8 @@ Vue.component('person-row', {
     props: ['person'],
     template:
         '<div style="width: 518px">' +
-        '<tr><td>({{ person.id }})</td> ' +
-        '<td>{{person.name}}</td> ' +
+        // '<td>({{ person.id }})</td> ' +
+        '<tr><td>{{person.name}}</td> ' +
         '<td>{{person.status}}</td></tr> ' +
         // '<span>' +
         // '<input type="button" value="Edit" v-on:click="edit" />' +
@@ -56,13 +56,6 @@ Vue.component('people-list', {
         '<div>' +
         '<person-form :people="people" style="display:none;"/>' +
         '<table class="table">' +
-        '<thead>' +
-        '<tr>' +
-        '<th>id</th>' +
-        '<th>Name</th>' +
-        '<th>Status</th> ' +
-        '</tr>' +
-        '</thead>' +
         '<tbody>' +
         '<person-row v-for = "person in people" :key="person.id" :person="person">' +
         '{{person.name}}' +
