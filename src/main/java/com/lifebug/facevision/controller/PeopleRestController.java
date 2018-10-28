@@ -17,8 +17,8 @@ public class PeopleRestController {
     private PeopleService service;
 
     //@ApiOperation("Returns all people")
-    @CrossOrigin(origins = "https://facevision27.herokuapp.com")
-    @GetMapping("/api/people")
+    @CrossOrigin(origins = "http://localhost:8080")
+    @GetMapping
     public List<People> getAllProfile() {
         return service.getAllProfile();
     }
