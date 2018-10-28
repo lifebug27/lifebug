@@ -57,6 +57,10 @@ Vue.component('people-list', {
         '<person-form :people="people" />' +
         '<person-row v-for = "person in people" :key="person.id" :person="person">' +
         '{{person.name}}' +
+        '<script> if (person.status === "yes") {document.getElementById("app").classList.add("--make-green");}' +
+        'else{' +
+        'document.getElementById("app").classList.remove("--make-green");}' +
+        '</script>' +
         '</person-row>' +
         '</div>',
     created: function () {
@@ -65,12 +69,6 @@ Vue.component('people-list', {
                 .then(data =>
                     data.forEach(person => {
                             this.people.push(person);
-                            if (person.status === 'yes') {
-                                document.getElementById('app').classList.add('--make-green');
-                            }
-                            else{
-                                document.getElementById('app').classList.remove('--make-green');
-                            }
 
                         }
                     )
