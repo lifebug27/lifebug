@@ -8,23 +8,23 @@ Vue.component('person-form', {
         }
     },
     template:
-    '<div>' +
-    '<input type="text" placeholder="Write something" v-model="text" />' +
-    '<input type="button" value="Save" v-on:click="save" />' +
-    '</div>',
+        '<div>' +
+        '<input type="text" placeholder="Write something" v-model="text" />' +
+        '<input type="button" value="Save" v-on:click="save" />' +
+        '</div>',
     methods: {
         save: function () {
             let person = {text: this.name, status: this.status};
 
             peopleApi.save({}, person)
                 .then(result =>
-                result.json()
-                    .then(data => {
-                    this.people.push(data);
-                    this.name = '';
-                    this.status = '';
-                })
-            )
+                    result.json()
+                        .then(data => {
+                            this.people.push(data);
+                            this.name = '';
+                            this.status = '';
+                        })
+                )
         }
     }
 });
@@ -32,14 +32,14 @@ Vue.component('person-form', {
 Vue.component('person-row', {
     props: ['person'],
     template: '<div>' +
-    '<i>({{ person.id }})</i> ' +
+        '<i>({{ person.id }})</i> ' +
         '{{person.name}} ' +
         '-------->' +
         '{{person.status}} ' +
-    // '<span>' +
-    // '<input type="button" value="Edit" v-on:click="edit" />' +
-    // '</span>' +
-    '</div>',
+        // '<span>' +
+        // '<input type="button" value="Edit" v-on:click="edit" />' +
+        // '</span>' +
+        '</div>',
     methods: {
         edit: function () {
 
@@ -50,26 +50,29 @@ Vue.component('person-row', {
 Vue.component('people-list', {
     props: ['people'],
     data: function () {
-        return{
-
-        }
+        return {}
     },
     template:
-    '<div>' +
-    '<person-form :people="people" />' +
-    '<person-row v-for = "person in people" :key="person.id" :person="person">' +
-    '{{person.name}}' +
-    '</person-row>' +
-    '</div>',
+        '<div>' +
+        '<person-form :people="people" />' +
+        '<person-row v-for = "person in people" :key="person.id" :person="person">' +
+        '{{person.name}}' +
+        '</person-row>' +
+        '</div>',
     created: function () {
         peopleApi.get()
             .then(result => result.json()
                 .then(data =>
-                    data.forEach(person =>
-                        this.people.push(person)
+                    data.forEach(function (person) {
+                            this.people.push(person);
+                            if (person.status === 'yes') {
+                                document.getElementById('app').class = '--make-green';
+                            }
+
+                        }
+                    )
                 )
             )
-        )
     },
     methods: {
         editMessage: function () {
