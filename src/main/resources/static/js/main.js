@@ -66,7 +66,10 @@ Vue.component('people-list', {
                     data.forEach(person => {
                             this.people.push(person);
                             if (person.status === 'yes') {
-                                document.getElementById('app').className = '--make-green';
+                                document.getElementById('app').classList.add('--make-green');
+                            }
+                            else{
+                                document.getElementById('app').classList.remove('--make-green');
                             }
 
                         }
